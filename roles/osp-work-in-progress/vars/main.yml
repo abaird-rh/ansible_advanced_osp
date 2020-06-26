@@ -8,8 +8,9 @@ osp_servers:
     flavor: m1.medium
     security_group: frontend
     float_ip: ext_network
-    meta_group: frontends
-    meta_deployment_name: QA
+    meta:
+      - group: frontends
+        deployment_name: QA
     userdata: "#!/bin/bash curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys"
     net_name: int_network
 
@@ -18,10 +19,10 @@ osp_servers:
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m1.medium
-    security_group: apps
+    securty_group: apps
     float_ip: ext_network
-    meta_group: apps
-    meta_deployment_name: QA
+    meta:
+      - { group: apps, deployment_name: QA}
     userdata: "#!/bin/bash curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys"
     net_name: int_network
 
@@ -32,8 +33,8 @@ osp_servers:
     flavor: m1.medium
     security_group: apps
     float_ip: ext_network
-    meta_group: apps
-    meta_deployment_name: QA
+    meta:
+      - { group: apps, deployment_name: QA}
     userdata: "#!/bin/bash curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys"
     net_name: int_network
 
@@ -44,7 +45,7 @@ osp_servers:
     flavor: m1.medium
     security_group: db
     float_ip: ext_network
-    meta_group: appdbs
-    meta_deployment_name: QA
+    meta:
+      - { group: appdbs, deployment_name: QA}
     userdata: "#!/bin/bash curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys"
     net_name: int_network

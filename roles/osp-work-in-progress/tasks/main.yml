@@ -12,9 +12,14 @@
     nics: 
       - net-name: "{{ item.net_name }}"
     userdata: "{{ item.userdata }}"
-    meta: "group={{ item.meta_group }},deployment_name={{ item.meta_deployment_name }}"
-  with_items:
-    - "{{ osp_servers }}"
+
+    meta: "group={{ item.meta.group }},deployment_name={{ item.meta.deployment_name }}"
+
+  loop: "{{ osp_servers }}"
+  #loop: "{{ osp_servers | subelements('meta')|list }}"
+  #with_nested:
+  #  - "{{ osp_servers }}"
+  #  - "{{ osp_servers|('meta)|list }}"
 
 - name: Add floating IP to instance
   os_floating_ip:
